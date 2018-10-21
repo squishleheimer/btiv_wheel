@@ -2,6 +2,7 @@ node_modules
 .tmp
 .sass-cache
 **/bower_components or sometimes it is lib/**
+dist
 platforms
 plugins
 *.swp
