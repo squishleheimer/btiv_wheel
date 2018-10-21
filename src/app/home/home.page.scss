@@ -1,0 +1,25 @@
+@mixin transform($property) {
+  -moz-transform: $property;
+  -webkit-transform: $property;
+      -ms-transform: $property;
+      -o-transform: $property;
+          transform: $property;
+}
+
+@mixin animate() {
+  -moz-animation: spin 3s linear infinite;
+  -webkit-animation: spin 3s linear infinite;
+  -ms-animation: spin 3s linear infinite;
+  -o-animation: spin 3s linear infinite;
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin{
+  0%   { -webkit-transform: rotate(-180deg) translate(0px, 0px);}
+  100% { -webkit-transform: rotate(180deg) translate(10px, 75px);}
+}
+
+#wheel {
+  // @include transform(rotate(30deg));
+  animation-name: spin;
+}

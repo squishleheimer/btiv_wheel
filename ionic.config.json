@@ -1,0 +1,8 @@
+{
+  "name": "btiv_wheel",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "pro_id": "b1d3d6cd"
+}
