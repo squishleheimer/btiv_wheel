@@ -17,9 +17,8 @@ import {
   animations: [
     trigger('myAwesomeAnimation', [
       transition(':enter', group([
-        query('#xx', animate('1000ms 250ms ease',
-        style({
-          transform: 'rotate(-15)'
+        query('#C', animate('1000ms 250ms ease', style({
+          transform: 'rotate(-15deg)'
         }))),
       ]))
     ])

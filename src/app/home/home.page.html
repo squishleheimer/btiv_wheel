@@ -7,13 +7,16 @@
 </ion-header>
 
 <ion-content padding>
-  <div id="A">
-    <img src="assets/A.png">
-    <div id="B">
-      <img src="assets/B.png">
-      <div id="C">
-        <img src="assets/C.png">
-      </div>
+  <div id="root">
+    <button type="button" label="C" (click)="rotateC()"></button>
+    <div id="A" class="static">
+      <img src="assets/A.png" alt="Wheel A">
+    </div>
+    <div id="B" class="spinner">
+      <img src="assets/B.png" alt="Wheel B">
+    </div>
+    <div id="C" class="spinner">
+      <img src="assets/C.png" alt="Wheel C">
     </div>
   </div>
 </ion-content>
