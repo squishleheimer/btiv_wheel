@@ -17,9 +17,9 @@ import {
   animations: [
     trigger('myAwesomeAnimation', [
       transition(':enter', group([
-        query('#svg8', animate('1000ms 250ms ease',
+        query('#xx', animate('1000ms 250ms ease',
         style({
-          transform: 'rotate(15deg)'
+          transform: 'rotate(-15)'
         }))),
       ]))
     ])
@@ -39,6 +39,6 @@ export class HomePage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.wheel = this.elRef.nativeElement.querySelector('#svg8');
+    this.wheel = this.elRef.nativeElement.querySelector('#root');
   }
 }
