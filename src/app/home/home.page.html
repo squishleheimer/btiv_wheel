@@ -6,16 +6,25 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <div id="root">
-    <button type="button" label="C" (click)="rotateC()"></button>
-    <div id="A" class="static">
+<ion-content>
+  <div id="root" class="ic">
+    <div id="A" class="wheel">
+      <div id="control" class="buttons">
+        <div class="buttons_left">
+          <button type="button" label="B_Left" id="BL_btn" (click)="rotateBLeft($event)">B Left</button>
+          <button type="button" label="C_Left" id="CL_btn" (click)="rotateCLeft($event)">C Left</button>
+        </div>
+        <div class="buttons_right"> 
+          <button type="button" label="C_Right" id="CR_btn" (click)="rotateCRight($event)">C Right</button>
+          <button type="button" label="B_Right" id="BR_btn" (click)="rotateBRight($event)">B Right</button>
+        </div>
+      </div>
       <img src="assets/A.png" alt="Wheel A">
     </div>
-    <div id="B" class="spinner">
+    <div [@bAnimation]="b_state" id="B" class="wheel">
       <img src="assets/B.png" alt="Wheel B">
     </div>
-    <div id="C" class="spinner">
+    <div [@cAnimation]="c_state" id="C" class="wheel">
       <img src="assets/C.png" alt="Wheel C">
     </div>
   </div>
