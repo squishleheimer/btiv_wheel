@@ -11,12 +11,12 @@
     <div id="A" class="wheel">
       <div id="control" class="buttons">
         <div class="buttons_left">
-          <button type="button" label="B_Left" id="BL_btn" (click)="rotateBLeft($event)">B Left</button>
-          <button type="button" label="C_Left" id="CL_btn" (click)="rotateCLeft($event)">C Left</button>
+          <button ion-button label="B_Left" (click)="rotateBLeft($event)">B Left</button>
+          <button ion-button label="C_Left" (click)="rotateCLeft($event)">C Left</button>
         </div>
         <div class="buttons_right"> 
-          <button type="button" label="C_Right" id="CR_btn" (click)="rotateCRight($event)">C Right</button>
-          <button type="button" label="B_Right" id="BR_btn" (click)="rotateBRight($event)">B Right</button>
+          <button ion-button label="C_Right" (click)="rotateCRight($event)">C Right</button>
+          <button ion-button label="B_Right" (click)="rotateBRight($event)">B Right</button>
         </div>
       </div>
       <img src="assets/A.png" alt="Wheel A">
