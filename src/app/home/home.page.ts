@@ -1,5 +1,6 @@
-import { Component, OnInit, HostBinding, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import {
+  AnimationBuilder,
   trigger,
   state,
   style,
@@ -10,74 +11,82 @@ import {
   query
 } from '@angular/animations';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
-  animations: [
-    trigger('bAnimation',[
-         state('b_left',style({
-            transform : 'rotate(0deg)'
-         })),
-         state('b_right',style({
-            transform : 'rotate(15deg)'
-         })),
-         transition('* <=> *', animate('500ms ease-in')),
-      ]),
-      trigger('cAnimation',[
-        state('c_left',style({
-           transform : 'rotate(0deg)'
-        })),
-        state('c_right',style({
-           transform : 'rotate(30deg)'
-        })),
-        transition('c_left <=> c_right', animate('500ms ease-in')),
-     ])
-  ],
+  styleUrls: ['home.page.scss']
 })
 export class HomePage implements OnInit, AfterViewInit {
-  private wheel: ElementRef;
 
-  private bIntervalDegrees: number = 15;
-  private cIntervalDegrees: number = 30;
+  private bIntervalRad: number = 15 * Math.PI / 180;
+  private cIntervalRad: number = 30 * Math.PI / 180;
 
-  public bDegrees: number = 0;
-  public cDegrees: number = 0;
+  public bRadians: number = 0;
+  public cRadians: number = 0;
 
-  public animateProfile = true;
-  
-  constructor(private elRef: ElementRef) {
-    
+  constructor(private animBuilder: AnimationBuilder) {
   }
 
   ngOnInit() {
   }
 
   ngAfterViewInit() {
-    this.wheel = this.elRef.nativeElement.querySelector('#root');
+  }
+  
+  @ViewChild('rotate_b') bRotateEl: ElementRef;
+  @ViewChild('rotate_c') cRotateEl: ElementRef;
+
+  private bPlayer;
+  private cPlayer;
+  
+  rotateB(): void {
+    const animateB = this.animBuilder.build([
+      animate(`300ms ease`, style({
+        transform : `rotate(${this.bRadians}rad)`
+      }))
+    ]);
+    
+    this.bPlayer = animateB.create(this.bRotateEl.nativeElement);
+    this.bPlayer.onDone((evt) => { 
+      console.log('B ANIMATION DONE', evt); });
+      console.log(`bRadians: ${this.bRadians}`);
+    this.bPlayer.play();
   }
 
-  public b_state: string = "b_left";
-  public c_state: string = "c_left";
+  rotateC(): void {
+    const animateC = this.animBuilder.build([
+      animate(`150ms ease`, style({
+        transform : `rotate(${this.cRadians}rad)`
+      }))
+    ]);
+
+    this.cPlayer = animateC.create(this.cRotateEl.nativeElement);
+    this.cPlayer.onDone((evt) => { 
+      console.log('C ANIMATION DONE', evt);
+      console.log(`cRadians: ${this.cRadians}`);
+     });
+    this.cPlayer.play();
+  }
 
   rotateBLeft(event) {
-    console.log(event);
-    this.b_state = "b_left";
-    this.bDegrees -= this.bIntervalDegrees;
+    this.bRadians -= this.bIntervalRad;
+    console.log(this.bRadians);
+    this.rotateB();
   }
   rotateBRight(event) {
-    console.log(event);
-    this.b_state = "b_right";
-    this.bDegrees += this.bIntervalDegrees;
+    this.bRadians += this.bIntervalRad;
+    console.log(this.bRadians);
+    this.rotateB();
   }
   rotateCLeft(event) {
-    console.log(event);
-    this.c_state = "c_left";
-    this.cDegrees -= this.cIntervalDegrees;
+    this.cRadians -= this.cIntervalRad;
+    console.log(this.cRadians);
+    this.rotateC();
   }
   rotateCRight(event) {
-    console.log(event);
-    this.c_state = "c_right";
-    this.cDegrees += this.cIntervalDegrees;
+    this.cRadians += this.cIntervalRad;
+    console.log(this.cRadians);
+    this.rotateC();
   }
 }
